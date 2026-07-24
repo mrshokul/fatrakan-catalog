@@ -187,7 +187,12 @@
     <h3>เข้าสู่ระบบเจ้าหน้าที่</h3>
     <p>สำหรับพนักงานร้านเพื่อเพิ่ม/แก้ไขสินค้า</p>
     <div class="fld"><label>อีเมล</label><input id="l_email" type="email" placeholder="staff@example.com"></div>
-    <div class="fld"><label>รหัสผ่าน</label><input id="l_pass" type="password" placeholder="••••••••"></div>
+    <div class="fld"><label>รหัสผ่าน</label>
+      <div style="position:relative;display:flex">
+        <input id="l_pass" type="password" placeholder="••••••••" style="flex:1;padding-right:46px">
+        <button type="button" id="l_eye" onclick="togglePass()" aria-label="แสดงหรือซ่อนรหัสผ่าน" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:20px;padding:4px;line-height:1">👁</button>
+      </div>
+    </div>
     <div class="err" id="l_err"></div>
     <div style="display:flex;gap:10px">
       <button class="btn btn-o" style="flex:1;justify-content:center" onclick="doLogin()">เข้าสู่ระบบ</button>
@@ -276,6 +281,10 @@ function updateAuthUI(){
 }
 function openLogin(){document.getElementById('l_err').textContent='';document.getElementById('loginModal').classList.add('open');document.getElementById('l_email').focus();}
 function closeLogin(){document.getElementById('loginModal').classList.remove('open');}
+function togglePass(){
+  var p=document.getElementById('l_pass'), b=document.getElementById('l_eye');
+  if(p.type==='password'){p.type='text';b.textContent='🙈';}else{p.type='password';b.textContent='👁';}
+}
 async function doLogin(){
   const email=document.getElementById('l_email').value.trim();
   const password=document.getElementById('l_pass').value;
